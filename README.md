@@ -37,6 +37,16 @@ The practice may not be the best, but I hope it to get better and better!
   - $.get
   - $.post
   - $.send (extended)
+
+usage scenario
+
+## Usage
+
+Get `JQueryWrapper.js` from src directory, then include your project.
+
+## Why?
+
+If your project no longer needs to use jQuery, but you don't want to affect the original behavior situation.
   
 ## Contribute & Bug report
 
