@@ -3,9 +3,6 @@
 一個扔掉 jQuery 包袱的包裝器！  
 A wrapper that throws away the jQuery baggage!
 
-做法上可能不是最好，但會希望它能越來越好！  
-The practice may not be the best, but I hope it to get better and better!
-
 ## Implemented function list
 
 - Operation
@@ -42,7 +39,12 @@ usage scenario
 
 ## Usage
 
-Get `JQueryWrapper.js` from src directory, then include your project.
+1. Get `JQueryWrapper.js` from src directory, then include your project.
+2. Use something like jQuery
+
+   ```
+   $(selector).xyz() // xyz mean implemented function.
+   ```
 
 ## Why?
 
