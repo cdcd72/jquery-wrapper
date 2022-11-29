@@ -350,6 +350,12 @@ _cm.prototype.insertAdjacent = function (position, object) {
     } else {
         var otherEl = object.el[0];
 
+        // other element not found
+        if (!otherEl) {
+            return self;
+        }
+
+        // other element found, but id the same
         if (selfEl.id === otherEl.id) {
             return self;
         }
