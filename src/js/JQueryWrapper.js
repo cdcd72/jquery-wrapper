@@ -108,6 +108,7 @@ var isArray = function (obj) {
  * @return {Object} - returns the _cm object to allow chaining methods.
  */
 var _cm = function (selector, parent) {
+
     var self = this;
 
     parent = parent || document;
@@ -142,7 +143,7 @@ var $ = function (selector, parent) {
 //#region Ajax
 
 $.support = {
-    cors: false,
+    cors: false
 };
 
 /**
@@ -151,15 +152,14 @@ $.support = {
  * @param {Object} options - options
  */
 $.send = function (options) {
+
     var xhr = new XMLHttpRequest();
     var url = options.url;
     var method = options.type;
     var async = options.async;
     var params = options.data;
     var dataType = options.dataType ? options.dataType : options.datatype;
-    var contentType = options.contentType
-        ? options.contentType
-        : options.contenttype;
+    var contentType = options.contentType ? options.contentType : options.contenttype;
     var successFn = options.success;
     var errorFn = options.error;
     var parseData = function (type, data) {
@@ -174,10 +174,7 @@ $.send = function (options) {
     xhr.open(method, url, async);
 
     if (method === 'POST') {
-        xhr.setRequestHeader(
-            'Content-type',
-            contentType ? contentType : 'application/x-www-form-urlencoded'
-        );
+        xhr.setRequestHeader('Content-type', contentType ? contentType : 'application/x-www-form-urlencoded');
     }
 
     xhr.onreadystatechange = function () {
@@ -203,17 +200,14 @@ $.send = function (options) {
  * @param {Object} options - options
  */
 $.get = function (options) {
+
     var data = options.data;
 
     if (data) {
         if (typeof data === 'object') {
             var query = [];
             for (var key in data) {
-                query.push(
-                    encodeURIComponent(key) +
-                        '=' +
-                        encodeURIComponent(data[key])
-                );
+                query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
             }
             options.url = options.url + '?' + query.join('&');
         } else {
@@ -233,21 +227,15 @@ $.get = function (options) {
  * @param {Object} options - options
  */
 $.post = function (options) {
+
     var data = options.data;
 
     if (data && typeof data === 'object') {
         // FormData
-        if (
-            options.contentType.indexOf('application/x-www-form-urlencoded') >
-            -1
-        ) {
+        if (options.contentType.indexOf('application/x-www-form-urlencoded') > -1) {
             var query = [];
             for (var key in data) {
-                query.push(
-                    encodeURIComponent(key) +
-                        '=' +
-                        encodeURIComponent(data[key])
-                );
+                query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
             }
             options.data = query.join('&');
             // Json
@@ -265,6 +253,7 @@ $.post = function (options) {
  * @param {Object} options - options
  */
 $.ajax = function (options) {
+
     switch (options.type) {
         case 'GET':
             $.get(options);
@@ -282,14 +271,15 @@ $.ajax = function (options) {
 /**
  * Run a callback against located elements.
  *
- * @param {function} fn - The callback we want to run on each element.
+ * @param {function} callback - The callback we want to run on each element.
  * @return {Object} - returns the _cm object to allow chaining methods.
  */
-_cm.prototype.each = function (fn) {
+_cm.prototype.each = function (callback) {
+
     var self = this;
 
     for (var i = 0; i < self.el.length; i++) {
-        fn(i, self.el[i]);
+        callback(i, self.el[i]);
     }
 
     return self;
@@ -308,13 +298,14 @@ _cm.prototype.find = function (selector) {
 /**
  * Show the element(s)
  *
- * @param {string} display - The css-display mode. Defaults to 'block'.
+ * @param {string} display - The css-display mode. Defaults to "inline".
  * @return {Object} - returns the _cm object to allow chaining methods.
  */
 _cm.prototype.show = function (display) {
+
     var self = this;
 
-    display = display || null;
+    display = display || 'inline';
 
     self.each(function (index, el) {
         el.style.display = display;
@@ -329,6 +320,7 @@ _cm.prototype.show = function (display) {
  * @return {Object} - returns the _cm object to allow chaining methods.
  */
 _cm.prototype.hide = function () {
+
     var self = this;
 
     self.each(function (index, el) {
@@ -346,6 +338,7 @@ _cm.prototype.hide = function () {
  * @return {Object} - returns the _cm object to allow chaining methods.
  */
 _cm.prototype.insertAdjacent = function (position, object) {
+
     var self = this,
         selfEl = self.el[0],
         text = '';
@@ -397,6 +390,7 @@ _cm.prototype.after = function (object) {
  * @return {string} - return element value.
  */
 _cm.prototype.val = function (value) {
+
     var self = this,
         selfEl = self.el[0];
 
@@ -416,6 +410,7 @@ _cm.prototype.val = function (value) {
  * @return {number} - return element width.
  */
 _cm.prototype.width = function (value) {
+
     var self = this,
         selfEl = self.el[0];
 
@@ -438,6 +433,7 @@ _cm.prototype.width = function (value) {
  * @return {number} - return element height.
  */
 _cm.prototype.height = function (value) {
+
     var self = this,
         selfEl = self.el[0];
 
@@ -502,6 +498,7 @@ _cm.prototype.camelCase = function (string) {
  * @return {Object|undefined} - returns element style value or undefined.
  */
 _cm.prototype.css = function (name, value) {
+
     var self = this;
 
     // Get element style
@@ -522,6 +519,7 @@ _cm.prototype.css = function (name, value) {
  * @return {Object|undefined} - returns element top and left or undefined.
  */
 _cm.prototype.offset = function (object) {
+
     var self = this,
         selfEl = self.el[0];
 
@@ -529,19 +527,20 @@ _cm.prototype.offset = function (object) {
 
     // Get element offset
     if (typeof object === 'undefined') {
+
         var elRect = selfEl.getBoundingClientRect(),
             bodyEl = document.body;
 
         return {
             top: elRect.top + bodyEl.scrollTop,
-            left: elRect.left + bodyEl.scrollLeft,
+            left: elRect.left + bodyEl.scrollLeft
         };
     }
 
     // Set element offset
     selfEl.style.position = 'relative';
-    selfEl.style.top = object.top / 3.4 + 'px';
-    selfEl.style.left = object.left / 6.12 + 'px';
+    selfEl.style.top = (object.top / 3.4) + 'px';
+    selfEl.style.left = (object.left / 6.12) + 'px';
 };
 
 /**
@@ -552,6 +551,7 @@ _cm.prototype.offset = function (object) {
  * @return {Object|undefined} - returns element attribute value or undefined.
  */
 _cm.prototype.attr = function (name, value) {
+
     var self = this;
 
     // Get element attribute
@@ -573,6 +573,7 @@ _cm.prototype.attr = function (name, value) {
  * @return {Object|undefined} - returns element property value or undefined.
  */
 _cm.prototype.prop = function (name, value) {
+
     var self = this;
 
     // Get element property
@@ -595,6 +596,7 @@ _cm.prototype.prop = function (name, value) {
  * @return {void}
  */
 _cm.prototype.ready = function (fn) {
+
     if (typeof fn !== 'function') {
         return;
     }
@@ -623,6 +625,7 @@ _cm.prototype.ready = function (fn) {
  * @return {Object} - returns the _cm object to allow chaining methods.
  */
 _cm.prototype.on = function (event, listener) {
+
     var self = this;
 
     addEvent(self.el[0], event, listener);
@@ -638,6 +641,7 @@ _cm.prototype.on = function (event, listener) {
  * @return {Object} - returns the _cm object to allow chaining methods.
  */
 _cm.prototype.off = function (event, listener) {
+
     var self = this;
 
     removeEvent(self.el[0], event, listener);
@@ -652,6 +656,7 @@ _cm.prototype.off = function (event, listener) {
  * @return {Object} - returns the _cm object to allow chaining methods.
  */
 _cm.prototype.keypress = function (listener) {
+
     var self = this;
 
     addEvent(self.el[0], 'keypress', listener);
